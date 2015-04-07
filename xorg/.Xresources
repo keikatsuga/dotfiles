@@ -1,0 +1,32 @@
+XTerm*utf8:1
+XTerm*font: -*-terminus-medium-*-*-*-18-*-*-*-*-*-iso10646-*
+!--------------------------------------------
+! General Colors
+
+xterm*foreground:                         white
+xterm*background:                         #111111
+
+!black
+xterm*color0:                             #59002f
+xterm*color8:                             #793156
+!red
+xterm*color1:                             #8c022c
+xterm*color9:                             #c0003a
+!green
+xterm*color2:                             #cd8c15
+xterm*color10:                            #dba239
+!yellow
+xterm*color3:                             #ffc863
+xterm*color11:                            #ffda95
+!blue
+xterm*color4:                             #330048
+xterm*color12:                            #502762
+!magenta
+xterm*color5:                             #8c0149
+xterm*color13:                            #c80069
+!cyan
+xterm*color6:                             #4c016b
+xterm*color14:                            #7200a3
+!white
+xterm*color7:                             #fd6f6b
+xterm*color15:                            #fdc3c1
