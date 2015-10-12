@@ -1,0 +1,83 @@
+secrets: secrets.yml
+
+schedules:
+#  - tasks: asiatorrents
+#    schedule:
+#      minute: "*/15"
+  - tasks: WafflesFreeleech
+    schedule:
+      minute: "*/10"
+  - tasks: AKB48 
+    schedule:
+      minute: "*/5"
+  - tasks: daily_email
+    interval:
+      days: 1
+templates:
+  at:
+    rss: 'http://feeds.feedburner.com/btavistaz'
+    headers:
+      Cookie: '{{ secrets.avistaz.cookie }}' 
+    urlrewrite:
+      site:
+        regexp: '(?x) ^ https:// (?P<host>[^/]+) .*? &id= (?P<id>[^&]+)'
+        format: 'https://\g<host>/download.php?id=\g<id>&f=\g<id>.torrent'
+  waffles:
+    rss: '{{ secrets.waffles.rss }}'
+    headers:
+      Cookie: '{{ secrets.waffles.cookie }}'
+  helloonline:
+    rss: 'http://www.hello-online.org/index.php?/rss/xbt/3-akb48/'
+    headers:
+      Cookie: '{{ secrets.helloonline.cookie }}' 
+    urlrewrite:
+      site:
+        regexp: 'http://www.hello-online.org/index.php\?app=xbt&CODE=details&torrent=(?P<id>)'
+        format: 'http://www.hello-online.org/index.php\?app=xbt&CODE=download&torrent=\g<id>'
+    
+tasks:
+  asiatorrents:
+    regexp:
+      accept:
+        - '^Infinity\sChallenge\sE...\s720p': '~/torrents/watch/tv/infinitychallenge'
+        - '^Infinity\sChallenge\sE...\sHDTV\s720p': '~/torrents/watch/tv/infinitychallenge'
+        - '^Infinity\sChallenge\sE...\s......\sHDTV\sH264\s720p': '~/torrents/watch/tv/infinitychallenge'
+        - '^Infinity.Challenge.E...........HDTV.H264.720p': '~/torrents/watch/tv/infinitychallenge'
+        - '^Running\sMan\sE...\s720p': '~/torrents/watch/tv/runningman'
+        - '^Running\sMan\sE...\sHDTV\s720p': '~/torrents/watch/tv/runningman'
+        - '^Running\sMan\sE...\s......\sHDTV\sH264\s720p': '~/torrents/watch/tv/runningman'
+        - '^Running.Man.E...........HDTV.H264.720p': '~/torrents/watch/tv/runningman'
+    download: ~/torrents/watch/tv
+    template: [ at ]
+    digest: dailyemail
+  WafflesFreeleech:
+    template: [ waffles ]
+    accept_all: yes
+    download: '~/torrents/watch/music'
+    digest: dailyemail
+  AKB48:
+    regexp:
+      accept:
+        - '......\sAKBINGO!\sep....mp4\s60fps'
+        - '^\[NKM48\]'
+        - '^\[AIDOL\]'
+        - '^\[UKN48\]'
+        - 'Paruru'
+        - 'Shimazaki\sHaruka'
+    download: '~/torrents/watch/akb48'
+    template: [ helloonline ]
+    digest: dailyemail
+  daily_email:
+    emit_digest:
+      list: dailyemail
+    seen: local
+    email:
+      from: '{{ secrets.email.from }}'
+      to: '{{ secrets.email.to }}'
+      smtp_host: smtp.gmail.com
+      smtp_port: 587
+      smtp_username: '{{ secrets.email.smtp_username }}'
+      smtp_password: '{{ secrets.email.smtp_password }}'
+      smtp_tls: yes
+
+
