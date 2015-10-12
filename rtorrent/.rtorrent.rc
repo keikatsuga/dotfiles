@@ -61,10 +61,10 @@ max_memory_usage = 1800M
 encoding_list = utf8
 
 #directory = RT_HOME/work
-session = /home/archzenki/torrents/.session
+session = ~/torrents/.session
 #scgi_local = RT_HOME/.scgi_local
 scgi_port = localhost:3333
-#log.execute = /home/archzenki/torrents/log/execute.log
+#log.execute = ~/torrents/log/execute.log
 
 # This was broken in some rTorrent versions, so always set it explicitely
 # (also allows you to use something else than the hostname to id the instance)
@@ -74,7 +74,7 @@ session.name.set = "$cat=$system.hostname=,:,$system.pid="
 #schedule = scgi_permission,0,0,"execute_nothrow=chmod,g+w,RT_HOME/.scgi_local"
 
 # SCHEDULE: Watch directories (if you use "pyrotorque", you can/should comment out the watches)
-schedule = watch_directory,5,5,load.start=/home/archzenki/torrents/watch/*.torrent
+schedule = watch_directory,5,5,load.start=~/torrents/watch/*.torrent
 schedule = watch_directory_2,5,5,"load.start=~/torrents/watch/tv/runningman/*.torrent,d.directory.set=~/torrents/tv/runningMan/"
 schedule = watch_directory_3,5,5,"load.start=~/torrents/watch/tv/infinitychallenge/*.torrent,d.directory.set=~/torrents/tv/infinityChallenge/"
 schedule = watch_directory_4,5,5,"load.start=~/torrents/watch/tv/roommate/*.torrent,d.directory.set=~/torrents/tv/roommate/"
@@ -85,10 +85,10 @@ schedule = watch_directory_8,5,5,"load.start=~/torrents/watch/game/*.torrent,d.d
 schedule = watch_directory_9,5,5,"load.start=~/torrents/watch/porn/*.torrent,d.directory.set=~/torrents/porn/"
 schedule = watch_directory_10,5,5,"load.start=~/torrents/watch/tv/thewalkingdead/*.torrent,d.directory.set=~/torrents/tv/thewalkingdead/"
 schedule = watch_directory_11,5,5,"load.start=~/torrents/watch/tv/doctorwho/*.torrent,d.directory.set=~/torrents/tv/doctorwho/"
-schedule = watch_directory_12,5,5,"load.start=~/torrents/watch/tv/akb48/*.torrent,d.directory.set=~/torrents/tv/akb48/"
+schedule = watch_directory_12,5,5,"load.start=~/torrents/watch/akb48/*.torrent,d.directory.set=~/torrents/akb48/"
 schedule = watch_directory_13,5,5,"load.start=~/torrents/watch/book/*.torrent,d.directory.set=~/torrents/book/"
 schedule = watch_directory_14,5,5,"load.start=~/torrents/watch/tv/got/*.torrent,d.directory.set=~/torrents/tv/got/"
-schedule = watch_directory_15,5,5,"load.start=~/torrents/watch/tv/tlmoe/*.torrent,d.directory.set=~/torrents/tv/tlmoe/"
+schedule = watch_directory_15,5,5,"load.start=~/torrents/watch/misc/*.torrent,d.directory.set=~/torrents/misc/"
 schedule = untied_directory,5,5,remove_untied=
 
 
